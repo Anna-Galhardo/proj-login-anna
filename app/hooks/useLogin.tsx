@@ -11,6 +11,7 @@ export function useLogin() {
   // Estados simples e separados, iguais aos do cadastro de produtos
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [nome, setNome] = useState('');
 
   // Função disparada ao clicar no botão Entrar
   function entrar(evento: React.FormEvent) {
@@ -36,10 +37,35 @@ export function useLogin() {
       });
   }
 
+   function cadastrar(evento: React.FormEvent) {
+    evento.preventDefault(); // Evita que a página recarregue
+
+    // Montamos o objeto que vai para a API
+    const dadosCadastro = {
+      nome: nome,
+      username: username,
+      password: password
+    };
+
+    api.post('/users/', dadosCadastro)
+      .then((resposta) => {
+        alert("Cadastro realizado com sucesso!")
+
+        // Vai para a página principal (Dashboard)
+        router.push('/');
+      })
+      .catch(() => {
+        // Mostra o erro simples se a senha estiver errada
+        alert('Erro: Não foi possível realizar o cadastro!');
+      });
+  }
+
   // Exportamos tudo que a tela vai precisar
   return {
     username, setUsername,
     password, setPassword,
-    entrar
+    nome, setNome,
+    entrar,
+    cadastrar
   };
 }

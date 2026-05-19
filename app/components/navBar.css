@@ -1,0 +1,25 @@
+nav{
+    display: flex;
+    background-color: black;
+    padding-inline: 30px;
+    padding-block: 50px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+a{
+   color: white; 
+}
+ p{
+    color: white;
+ }
+ .group-links{
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   gap: 30px;
+ }
+
+ .btn{
+   color: white;
+ }
