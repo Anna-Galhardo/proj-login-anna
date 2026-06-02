@@ -9,9 +9,9 @@ export function useLogin() {
   const router = useRouter();
 
   // Estados simples e separados, iguais aos do cadastro de produtos
+  const [name, setName] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [nome, setNome] = useState('');
 
   // Função disparada ao clicar no botão Entrar
   function entrar(evento: React.FormEvent) {
@@ -26,7 +26,7 @@ export function useLogin() {
     api.post('/users/auth', dadosLogin)
       .then((resposta) => {
         Cookies.set('logged', 'true', { expires: 1 }); // Expira as credenciais de login em 1 dia
-        Cookies.set('userName', resposta.data.nome, { expires: 1 }); // Expira o nome em 1 dia
+        Cookies.set('userName', resposta.data.name, { expires: 1 }); // Expira o nome em 1 dia
 
         // Vai para a página principal (Dashboard)
         router.push('/dashboard');
@@ -37,26 +37,26 @@ export function useLogin() {
       });
   }
 
-   function cadastrar(evento: React.FormEvent) {
+  function cadastrar(evento: React.FormEvent) {
     evento.preventDefault(); // Evita que a página recarregue
 
     // Montamos o objeto que vai para a API
     const dadosCadastro = {
-      nome: nome,
+      name: name,
       username: username,
       password: password
     };
 
     api.post('/users/', dadosCadastro)
       .then((resposta) => {
-        alert("Cadastro realizado com sucesso!")
+        alert('Cadastro realizado com sucesso!!')
 
         // Vai para a página principal (Dashboard)
         router.push('/');
       })
       .catch(() => {
         // Mostra o erro simples se a senha estiver errada
-        alert('Erro: Não foi possível realizar o cadastro!');
+        alert('Não foi possível finalizar o cadastro!');
       });
   }
 
@@ -64,7 +64,7 @@ export function useLogin() {
   return {
     username, setUsername,
     password, setPassword,
-    nome, setNome,
+    name, setName,
     entrar,
     cadastrar
   };
