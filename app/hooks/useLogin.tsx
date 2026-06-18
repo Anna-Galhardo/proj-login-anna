@@ -9,7 +9,7 @@ export function useLogin() {
   const router = useRouter();
 
   // Estados simples e separados, iguais aos do cadastro de produtos
-  const [name, setName] = useState('');
+  const [nome, setNome] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -42,7 +42,7 @@ export function useLogin() {
 
     // Montamos o objeto que vai para a API
     const dadosCadastro = {
-      name: name,
+      nome: nome,
       username: username,
       password: password
     };
@@ -64,7 +64,7 @@ export function useLogin() {
   return {
     username, setUsername,
     password, setPassword,
-    name, setName,
+    nome, setNome,
     entrar,
     cadastrar
   };
